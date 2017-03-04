@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_service_explanation"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="サービス説明"/>
+        <item
+            android:id="@+id/nav_notice"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="お知らせ"/>
+        <item
+            android:id="@+id/nav_license"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="ライセンス"/>
+    </group>
+</menu>
