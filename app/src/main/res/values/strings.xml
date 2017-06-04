@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">講師一覧</string>
-
+    <string name="register_teacher">講師登録</string>
+    <string name="spn_prompt">サービスを選択して下さい</string>
+    <string-array name="spn_items">
+        <item>dmm</item>
+        <item>rarejob</item>
+    </string-array>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

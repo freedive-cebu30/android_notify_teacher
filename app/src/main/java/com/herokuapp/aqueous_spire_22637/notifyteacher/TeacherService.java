@@ -10,9 +10,11 @@ import rx.Observable;
  */
 
 public interface TeacherService {
-    @GET("api/teachers")
-    Observable<TeacherList> getListTeacher();
+    @GET("api/teachers?service_name=dmm")
+    Observable<TeacherList> getListDmmTeacher();
 
+    @GET("api/teachers?service_name=rarejob")
+    Observable<TeacherList> getListRarejobTeacher();
 
     class TeacherList {
         public final List<Teacher> teachers;

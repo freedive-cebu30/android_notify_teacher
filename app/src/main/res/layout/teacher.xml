@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="#f8f8ff">
+    <EditText
+        android:id="@+id/register_teacher_name"
+        android:inputType="textPersonName"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:hint="講師名"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <requestFocus />
+    </EditText>
+    <EditText
+        android:id="@+id/register_teacher_number"
+        android:inputType="number"
+        android:layout_marginBottom="20dp"
+        android:hint="講師の番号"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </EditText>
+    <Spinner
+        android:id="@+id/register_teacher_service"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/spn_items"
+        android:prompt="@string/spn_prompt"
+        android:spinnerMode="dialog"
+        />
+    <Button
+        android:id="@+id/register_teacher"
+        android:onClick="registerTeacher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp"
+        android:textColor="#6495ed"
+        android:text="@string/register_teacher"
+        />
+
+</LinearLayout>

@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
+            android:onClick="displayPage"
             android:id="@+id/nav_service_explanation"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="サービス説明"/>

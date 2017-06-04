@@ -1,9 +1,14 @@
 package com.herokuapp.aqueous_spire_22637.notifyteacher;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -30,7 +35,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,ViewPager.OnPageChangeListener,
+        PageFragment.OnFragmentInteractionListener {
 
     private RecyclerView recyclerView;
     public static final String DOMAIN = "aqueous-spire-22637.herokuapp.com";
@@ -50,6 +56,36 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         //RecycleViewをセット
         setupView();
+        //Tabをセット
+        setTab();
+    }
+
+    private void setTab(){
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final String[] pageTitle = {"DMM", "RAREJOB"};
+
+        FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()){
+
+            @Override
+            public int getCount() {
+                return pageTitle.length;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return pageTitle[position];
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                return PageFragment.newInstance(position + 1);
+            }
+        };
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(this);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void setupView(){
@@ -62,7 +98,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-//    private List<Teacher> getListTeacher(){
+    public void displayPage(MenuItem item){
+        Log.d("displayPage", "test");
+        Intent intent = new Intent(this, PageActivity.class);
+        startActivity(intent);
+    }
+
     private void getListTeacher(){
         Retrofit retrofit;
         //Log
@@ -87,7 +128,7 @@ public class MainActivity extends AppCompatActivity
                     .build();
 
         TeacherService teacherService = retrofit.create(TeacherService.class);
-        Observable<TeacherService.TeacherList> observable = teacherService.getListTeacher();
+        Observable<TeacherService.TeacherList> observable = teacherService.getListDmmTeacher();
 
         observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<TeacherService.TeacherList>() {
             @Override
@@ -110,12 +151,11 @@ public class MainActivity extends AppCompatActivity
      * FloatButton
      */
     private void setFloatButton(){
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton register_teacher = (FloatingActionButton) findViewById(R.id.register);
+        register_teacher.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                TeacherActivity.startActivity(MainActivity.this);
             }
         });
     }
@@ -155,5 +195,24 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
